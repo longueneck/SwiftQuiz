@@ -29,3 +29,4 @@ class Quiz {
         print("Liberou o Qeue da Memoria")
     }
     
+}

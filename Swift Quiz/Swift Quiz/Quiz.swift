@@ -7,13 +7,9 @@
 
 import UIKit
 
-class Quiz: UIViewController {
+class CQuiz: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
     
     @IBOutlet weak var viTimer: UIView!
     
@@ -21,44 +17,54 @@ class Quiz: UIViewController {
     
      @IBOutlet var btAnswers: [UIButton]!
     
+    let quizManager = QuizManager()
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    */
-
-}
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viTimer.frame.size.width = view.frame.size.width
+        UIView.animate(withDuration: 60.0, delay: 0, options: .curveLinear,  animations: {
+            self.viTimer.frame.size.width = 0
+        }) { (success) in
+            self.showResults()
+        }
+            
+            getNewQuiz()
+            
+    }
+    
+    
+        func getNewQuiz() {
+            quizManager.refreshQuiz()
+            lbQuestion.text = quizManager.question
+            for i in 0..<quizManager.options.count{
+                let option = quizManager.options[i]
+                let button = btAnswers[i]
+                button.setTitle(option, for: .normal)
+            }
+        }
+    
+        func showResults(){
+            
+        }
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
